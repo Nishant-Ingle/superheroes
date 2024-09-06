@@ -1,0 +1,80 @@
+# Features
+
+1 Browse a list of superheroes -> Get all
+  Search bar
+2 View detailed information about each superhero -> Get sh api, cache
+3 Add new superhero -> Post api
+4 Update superhero -> put api
+5 Update superhero only if you have editing rights -> rbac
+6 Startup db fetch from API
+* Team Formation
+  7 Random team formation
+  8 Manual team formation
+    9 Recommendations of right panel based on balanced powers
+
+
+Future additions:
+  10 [Team] Compare teams and predict winner with explanation
+  11 [Team] Fill remaining randomly
+  12 [Team] What if we want to have a filtered random selection
+
+
+Steps:
+
+  1. DB Schema Design, help: chatgpt, document for hero attributes - d
+  [Fast API]
+
+  2. API design, help: chatgpt, doc for api(swagger) - d
+  3. Comments - d
+  4. Type update & annotations - d
+     https://stackoverflow.com/questions/15853469/putting-current-class-as-return-type-annotation
+  5. Error handling - d
+  6. Logging - d
+  7. Search API - d
+
+  [React NextJS]
+  10. UI
+  11. Containerize
+
+  8. Caching + DB
+  9. Auth n/z with rbac
+
+  12. Teams APIs
+  13. Teams UI
+
+
+# Marking
+
+* Code Quality: Optimized, readable, commented code, type annotations
+* Functionality: Handle all cases, error handling.
+* UI Design: UI Wireframes, Bootstrap
+* Doc: Readme, Swagger
+* Comm: Script
+
+
+# Assumptions
+Superhero: Has id, name, (inte, pow, sp, str) and img url.
+
+# APIs
+
+Get all superheroes - d
+Get superhero - d
+Add superhero - d
+Update superhero - d
+
+
+# Pending/Q&A
+
+1. Multithreading
+2. id function built-in
+3. deepcopy of superhero list in python
+4. Singleton in Python, metaclass
+5. Async def
+6. Private variable
+7. Query params superhero_id
+8. Pydantic
+9. Class methods - superhero class from_dict
+10. Optional
+11. init.py
+12. decorators
+13. Logging to a file
