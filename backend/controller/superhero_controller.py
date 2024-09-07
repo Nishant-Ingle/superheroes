@@ -4,6 +4,7 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
+from fastapi.middleware.cors import CORSMiddleware
 
 from backend.config.startup import perform_startup_tasks
 from backend.models.Superhero import Superhero
@@ -12,7 +13,11 @@ from backend.service.SuperheroService import SuperheroService
 app = FastAPI(
     title="Superhero API",
     description="API for managing superheroes",
-    docs_url="/docs"  # URL for interactive API documentation
+    docs_url="/docs")  # URL for interactive API documentation
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"]
 )
 
 

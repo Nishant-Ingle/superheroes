@@ -34,13 +34,23 @@ Steps:
 
   [React NextJS]
   10. UI
-  11. Containerize
+      - wireframes of pages - d
+      - superhero get all page -
+      - superhero get details
+      - superhero update
+      - superhero create new
 
-  8. Caching + DB
-  9. Auth n/z with rbac
+      - teams pages
+      - auth/n page
+
+  11. Containerize with Dockerfile: psql, react, fast-api
+
+  8. DB - d
+  9. Caching - d
 
   12. Teams APIs
   13. Teams UI
+  14. RBAC auth/z
 
 
 # Marking
@@ -51,9 +61,6 @@ Steps:
 * Doc: Readme, Swagger
 * Comm: Script
 
-
-# Assumptions
-Superhero: Has id, name, (inte, pow, sp, str) and img url.
 
 # APIs
 
@@ -78,3 +85,13 @@ Update superhero - d
 11. init.py
 12. decorators
 13. Logging to a file
+14. If no image_url or image_url = null then ?
+
+
+# Script
+
+1. UUID instead of ID
+2. Sql injection prevention
+3. User has to remember id and give id for new superhero
+4. Superhero: Has id, name, (inte, pow, sp, str) and img url.
+5. 20% cache, only app has access to db
