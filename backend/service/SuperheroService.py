@@ -1,5 +1,5 @@
 import logging
-from backend.service.LRUCache import LRUCache
+from backend.service.Cache import Cache
 from typing import List, Dict, Optional, Tuple
 
 import configparser
@@ -19,8 +19,9 @@ class SuperheroService:
     config.read("../resources/app.properties")
     db_name = config["DEFAULT"]["db_name"]
     table_name = config["DEFAULT"]["superhero_table_name"]
-    hero_size = int(config["DEFAULT"]["max_heroes"])
-    cache = LRUCache(hero_size)
+    disable_superhero_img_update = bool(config["DEFAULT"]["disable_superhero_img_update"])
+    superhero_fields = ["id", "name", "strength", "speed", "power", "intelligence", "image_url"]
+    cache = Cache()
 
     insert_statement = ("insert into " + table_name +
                         "(id, name, strength, speed, power, intelligence, image_url) values(?, ?, ?, ?, ?, ?, ?) " +
@@ -45,6 +46,7 @@ class SuperheroService:
         """
         with sqlite3.connect(self.db_name) as conn:
             cur = conn.cursor()
+            # logging.info(self.insert_statement, superheroes)
             cur.executemany(self.insert_statement, superheroes)
             conn.commit()
 
@@ -55,7 +57,7 @@ class SuperheroService:
         if not self.cache.is_empty():
             return [item for item in self.cache.peek_all() if name in item["name"].lower()]
 
-        select_query = "select id, name, strength, speed, power, intelligence, image_url from " + self.table_name
+        select_query = "select id, name from " + self.table_name + " where name like '%" + name + "%'"
         heroes = []
         with sqlite3.connect(self.db_name) as conn:
             cur = conn.cursor()
@@ -63,11 +65,8 @@ class SuperheroService:
             rows: list[Superhero] = cur.fetchall()
             logging.info(f"Fetched {len(rows)} superheroes from database.")
             for row in rows:
-                superhero = Superhero.from_list(row)
-                if name not in superhero.name:
-                    continue
-                superhero_entry = {"id": superhero.id, "name": superhero.name}
-                self.cache.put(superhero.id, superhero_entry)
+                superhero_entry = {"id": row[0], "name": row[1]}
+                self.cache.put(superhero_entry["id"], superhero_entry)
                 heroes.append(superhero_entry)
         return heroes
 
@@ -82,8 +81,11 @@ class SuperheroService:
             cur = conn.cursor()
             cur.execute(select_query)
             superhero = cur.fetchone()
-            if superhero:
-                return Superhero.from_list(superhero)
+            if superhero and len(superhero) == 7:
+                dict = {}
+                for i, f in enumerate(self.superhero_fields):
+                    dict[self.superhero_fields[i]] = superhero[i]
+                return Superhero.from_dict(dict)
 
         return None
 
@@ -100,7 +102,9 @@ class SuperheroService:
                                    superhero.speed,
                                    superhero.power,
                                    superhero.intelligence,
-                                   superhero.image_url)
+                                   superhero.image_url
+                                   if not self.disable_superhero_img_update
+                                   else "")
                 cur.execute(self.insert_statement, superhero_tuple)
                 self.cache.put(superhero.id, {"id": superhero.id, "name": superhero.name})
                 return True
@@ -111,16 +115,20 @@ class SuperheroService:
         """
         Update superhero in the list if present.
         """
-        if self.get_superhero(superhero.id):
+        curr_superhero = self.get_superhero(superhero.id)
+        if curr_superhero:
             with sqlite3.connect(self.db_name) as conn:
                 cur = conn.cursor()
+
                 superhero_tuple = (superhero.name,
                                    superhero.strength,
                                    superhero.speed,
                                    superhero.power,
                                    superhero.intelligence,
-                                   superhero.image_url,
-                                   superhero.id)
+                                   superhero.image_url
+                                   if not self.disable_superhero_img_update
+                                   else curr_superhero.image_url,
+                                   curr_superhero.id)
                 cur.execute(self.update_statement, superhero_tuple)
                 self.cache.put(superhero.id, {"id": superhero.id, "name": superhero.name})
                 return True

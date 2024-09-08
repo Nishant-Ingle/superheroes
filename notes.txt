@@ -33,24 +33,23 @@ Steps:
   7. Search API - d
 
   [React NextJS]
-  10. UI
+  8. UI - d
       - wireframes of pages - d
-      - superhero get all page -
-      - superhero get details
-      - superhero update
-      - superhero create new
+      - superhero get all page - d
+      - superhero get details - d
+      - superhero update - d
+      - superhero create new - d
+      - teams tab dummy text addition - d
+      - auth/n page wireframe - d
 
-      - teams pages
-      - auth/n page
 
-  11. Containerize with Dockerfile: psql, react, fast-api
+  9. DB - d
+  10. Caching - d
 
-  8. DB - d
-  9. Caching - d
-
-  12. Teams APIs
-  13. Teams UI
-  14. RBAC auth/z
+  11. Teams APIs
+  12. Teams UI
+  13. Containerize with Dockerfile: react, fast-api
+  14. RBAC auth/z [Optional]
 
 
 # Marking
@@ -86,6 +85,10 @@ Update superhero - d
 12. decorators
 13. Logging to a file
 14. If no image_url or image_url = null then ?
+15. Cache code trim
+16. CORS
+17. Debounce Search
+18. Context API, useEffect
 
 
 # Script
@@ -95,3 +98,7 @@ Update superhero - d
 3. User has to remember id and give id for new superhero
 4. Superhero: Has id, name, (inte, pow, sp, str) and img url.
 5. 20% cache, only app has access to db
+6. Center focused UI
+7. Meant for monitors
+8. Image addition/update not supported
+
