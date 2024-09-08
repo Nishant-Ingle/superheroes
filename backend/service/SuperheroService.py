@@ -1,4 +1,5 @@
 import logging
+from backend.config.constants import props_file_abs_path, db_file_abs_path
 from backend.service.Cache import Cache
 from typing import List, Dict, Optional, Tuple
 
@@ -16,8 +17,8 @@ class SuperheroService:
     __instance: 'SuperheroService' = None
 
     config = configparser.ConfigParser()
-    config.read("../resources/app.properties")
-    db_name = config["DEFAULT"]["db_name"]
+    config.read(props_file_abs_path)
+    db_name = db_file_abs_path
     table_name = config["DEFAULT"]["superhero_table_name"]
     disable_superhero_img_update = bool(config["DEFAULT"]["disable_superhero_img_update"])
     superhero_fields = ["id", "name", "strength", "speed", "power", "intelligence", "image_url"]

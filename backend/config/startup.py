@@ -6,6 +6,7 @@ from typing import List, Tuple
 import requests
 import sqlite3
 from logging import Logger
+from backend.config.constants import props_file_abs_path, db_file_abs_path
 from backend.models.SuperheroExternal import SuperheroExternal
 from backend.service.SuperheroService import SuperheroService
 
@@ -115,9 +116,9 @@ def perform_startup_tasks():
     """
     global config
     config = configparser.ConfigParser()
-    config.read("../resources/app.properties")
+    config.read(props_file_abs_path)
 
-    db_name = config["DEFAULT"]["db_name"]
+    db_name = db_file_abs_path
     table_name = config["DEFAULT"]["superhero_table_name"]
     db_ops(db_name, table_name)
     log_config()

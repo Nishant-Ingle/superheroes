@@ -4,11 +4,12 @@ import configparser
 
 from backend.models.PowerStats import PowerStats
 from backend.models.Team import Team
+from backend.config.constants import props_file_abs_path
 from backend.service.SuperheroService import SuperheroService
 
 superhero_service = SuperheroService.get_instance()
 config = configparser.ConfigParser()
-config.read("../resources/app.properties")
+config.read(props_file_abs_path)
 team_size = int(config["DEFAULT"]["team_member_count"])
 max_heroes = int(config["DEFAULT"]["max_heroes"])
 team_size = min(team_size, max_heroes)
