@@ -1,28 +1,16 @@
 from typing import Optional
 
-import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import APIRouter
+from fastapi import HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from fastapi.middleware.cors import CORSMiddleware
 
-from backend.config.startup import perform_startup_tasks
 from backend.models.Superhero import Superhero
 from backend.service.SuperheroService import SuperheroService
 
-app = FastAPI(
-    title="Superhero API",
-    description="API for managing superheroes",
-    docs_url="/docs")  # URL for interactive API documentation
+router = APIRouter()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
-    allow_methods=["GET", "POST", "PUT"]
-)
-
-
-@app.get("/superheroes", summary="Retrieve all superheroes")
+@router.get("/superheroes", summary="Retrieve all superheroes")
 async def get_all_superheroes(name: Optional[str] = ""):
     """
     Retrieves a list of all superheroes.
@@ -33,7 +21,7 @@ async def get_all_superheroes(name: Optional[str] = ""):
     return JSONResponse(SuperheroService.get_instance().get_superheroes(name.lower()))
 
 
-@app.get("/superheroes/{superhero_id}", summary="Retrieve a superhero by ID")
+@router.get("/superheroes/{superhero_id}", summary="Retrieve a superhero by ID")
 async def get_superhero_by_id(superhero_id: int):
     """
     Retrieves a specific superhero object based on its ID.
@@ -56,7 +44,7 @@ async def get_superhero_by_id(superhero_id: int):
     return JSONResponse(jsonable_encoder(superhero))
 
 
-@app.post("/superheroes", summary="Add a new superhero")
+@router.post("/superheroes", summary="Add a new superhero")
 async def add_superhero(superhero: Superhero):
     """
     Adds a new superhero to the database.
@@ -84,7 +72,7 @@ async def add_superhero(superhero: Superhero):
     raise HTTPException(detail=f"Superhero update failed, make sure ID is not already present.", status_code=400)
 
 
-@app.put("/superheroes/{superhero_id}", summary="Update a superhero")
+@router.put("/superheroes/{superhero_id}", summary="Update a superhero")
 async def update_superhero(superhero: Superhero):
     """
     Updates an existing superhero.
@@ -108,8 +96,3 @@ async def update_superhero(superhero: Superhero):
         raise HTTPException(detail=f"Superhero update failed: {str(e)}", status_code=500)
 
     raise HTTPException(detail=f"Superhero update failed, please check if ID already present.", status_code=400)
-
-
-if __name__ == "__main__":
-    perform_startup_tasks()
-    uvicorn.run(app)

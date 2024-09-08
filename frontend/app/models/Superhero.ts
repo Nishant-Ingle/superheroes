@@ -1,9 +1,7 @@
-export interface Superhero {
+import {PowerStats} from "@/app/models/PowerStats";
+
+export interface Superhero extends PowerStats{
     id: number;
     name: string;
-    strength: number;
-    speed: number;
-    power: number;
-    intelligence;
     image_url: string;
 }

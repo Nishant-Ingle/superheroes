@@ -206,20 +206,20 @@ export default function Superheroes() {
                             </div>
 
                             <div className="input-group mb-3 row">
-                                <button id={'wl-create-update-btn'} type="submit" className={'btn btn-primary col-2'} onClick={createOrUpdateSuperhero}>
+                                <button id={'wl-create-update-btn'} type="submit" className={'btn btn-outline-primary col-2'} onClick={createOrUpdateSuperhero}>
                                     {opState === 'create' ? 'Create': 'Update'}
                                 </button>
-                                <button id={'reset'} type={'reset'} className={'btn btn-secondary col-2'} onClick={resetForm}>
+                                <button id={'reset'} type={'reset'} className={'btn btn-outline-secondary col-2'} onClick={resetForm}>
                                     Reset
                                 </button>
                             </div>
                         </div>
 
                         {/*Image*/}
-                        <div className="col-4">
+                        <div className="col-1 offset-1">
                             {
                                 currSuperhero.image_url &&
-                                <img id={'hero-img'} src={currSuperhero?.image_url} />
+                                <img className={'hero-img'} src={currSuperhero?.image_url} />
                             }
                         </div>
                     </div>

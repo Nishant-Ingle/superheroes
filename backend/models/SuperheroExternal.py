@@ -1,28 +1,7 @@
-from typing import Optional
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel
 
-
-class PowerStats(BaseModel):
-    """
-    Class to represent powerstats of a superhero.
-    """
-    intelligence: int = 0
-    strength: int = 0
-    speed: int = 0
-    power: int = 0
-
-    @field_validator("intelligence", "strength", "speed", "power", mode="before")
-    def validate_powerstats(cls, value):
-        if value is None or value == "null":
-            return 0
-        return int(value)
-
-
-class Image(BaseModel):
-    """
-    Class to represent superhero image.
-    """
-    url: Optional[str] = None
+from backend.models.Image import Image
+from backend.models.PowerStats import PowerStats
 
 
 class SuperheroExternal(BaseModel):

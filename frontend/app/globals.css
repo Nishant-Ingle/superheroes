@@ -1,1 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+.hero-img {
+    height: 12rem;
+    width: 12rem;
+}

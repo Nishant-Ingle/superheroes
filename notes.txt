@@ -46,10 +46,12 @@ Steps:
   9. DB - d
   10. Caching - d
 
-  11. Teams APIs
-  12. Teams UI
+  11. Teams APIs - d
+  12. Teams UI - d
   13. Containerize with Dockerfile: react, fast-api
   14. RBAC auth/z [Optional]
+  15. Verify Everything, Improve Everything
+
 
 
 # Marking
@@ -89,6 +91,9 @@ Update superhero - d
 16. CORS
 17. Debounce Search
 18. Context API, useEffect
+19. Webpack
+20. build dist dev
+21. Properties in UI
 
 
 # Script
