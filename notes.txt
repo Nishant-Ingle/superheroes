@@ -107,3 +107,10 @@ Update superhero - d
 7. Meant for monitors
 8. Image addition/update not supported
 
+
+docker-compose
+--------------
+
+docker-compose build --no-cache
+docker-compose up
+docker-compose down

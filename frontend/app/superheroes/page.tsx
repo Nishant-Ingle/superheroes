@@ -9,7 +9,7 @@ import {Superhero} from "@/app/models/Superhero";
 
 
 export default function Superheroes() {
-    let [search, setSearch] = useState('');
+    const [search, setSearch] = useState('');
 
     const [opState, setOpstate] = useState('update');
     const emtpySuperhero = {
@@ -87,7 +87,7 @@ export default function Superheroes() {
                     headers: {
                         'Content-Type': 'application/json'
                     }
-                }).then((resp: AxiosResponse) => {
+                }).then(() => {
                     alert('Superhero updated !')
                     searchHeroes();
             })
@@ -219,7 +219,7 @@ export default function Superheroes() {
                         <div className="col-1 offset-1">
                             {
                                 currSuperhero.image_url &&
-                                <img className={'hero-img'} src={currSuperhero?.image_url} />
+                                <img className={'hero-img'} src={currSuperhero.image_url} />
                             }
                         </div>
                     </div>

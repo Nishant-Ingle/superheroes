@@ -4,7 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.controller import superheroes_controller, teams_controller
 from backend.config.startup import perform_startup_tasks
 
-
 app = FastAPI(
     title="Superhero API",
     description="API for managing superheroes",

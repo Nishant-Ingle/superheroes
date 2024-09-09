@@ -1,3 +1,5 @@
+'use client';
+
 import React, {useState} from "react";
 import axios, {AxiosResponse} from "axios";
 import Form from 'react-bootstrap/Form';
@@ -33,7 +35,7 @@ export default function Teams() {
                     <Form className={'mb-3 form-check row'} onSubmit={fetchTeams}>
                         <span key={`inline-radio`} className="mb-3">
                             <Form.Check
-                                onChange={e => setCriteria(random)}
+                                onChange={() => setCriteria(random)}
                                 inline
                                 checked={criteria === random}
                                 label="Random"
@@ -42,7 +44,7 @@ export default function Teams() {
                                 id={`radio-random`}
                             />
                             <Form.Check
-                                onChange={e => setCriteria(balanced)}
+                                onChange={() => setCriteria(balanced)}
                                 inline
                                 label="Balanced"
                                 name="criteria"
@@ -71,7 +73,7 @@ export default function Teams() {
                                         <th scope={'col'} className={'col-1'}>Speed</th>
                                         <th scope={'col'} className={'col-1'}>Power</th>
                                         <th scope={'col'} className={'col-1'}>Intelligence</th>
-                                        <th scope={'col'} className={'col-5'}>Image</th>
+                                        <th scope={'col'} className={'col-4 offset-1'}>Image</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,7 +85,7 @@ export default function Teams() {
                                             <td className={'col-1'}>{superhero.speed}</td>
                                             <td className={'col-1'}>{superhero.power}</td>
                                             <td className={'col-1'}>{superhero.intelligence}</td>
-                                            <td className={'col-5'}>
+                                            <td className={'col-4 offset-1'}>
                                                 <img src={superhero.image_url} className={'hero-img'}/>
                                             </td>
                                         </tr>
@@ -98,7 +100,7 @@ export default function Teams() {
                                         <td className={'col-1'}>{team?.team_powerstats.speed}</td>
                                         <td className={'col-1'}>{team?.team_powerstats.power}</td>
                                         <td className={'col-1'}>{team?.team_powerstats.intelligence}</td>
-                                        <td className={'col-5'}></td>
+                                        <td className={'col-4 offset-1'}></td>
                                     </tr>
                                 </tfoot>
                             </table>
