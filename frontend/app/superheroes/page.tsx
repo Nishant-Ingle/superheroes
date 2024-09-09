@@ -48,7 +48,10 @@ export default function Superheroes() {
             } else {
                 setSuperheroes(superheroData);
             }
-        }).catch(console.error);
+        }).catch((err) => {
+            console.log(err);
+            alert('Failed to fetch superheroes');
+        });
     };
 
     const displaySuperheroDetails = (superheroId) => {
@@ -65,7 +68,10 @@ export default function Superheroes() {
             const fetchedSuperhero = resp.data as Superhero
             setCurrSuperhero(fetchedSuperhero)
             setIsHeroFetched(true);
-        }).catch(console.error);
+        }).catch((err) => {
+            console.log(err);
+            alert('Failed to fetch superhero details');
+        });
     }
 
     const submitHero = (e: React.FormEvent<HTMLFormElement>) => {
@@ -91,7 +97,10 @@ export default function Superheroes() {
                     alert('Superhero updated !')
                     searchHeroes();
             })
-            .catch(console.error);
+            .catch((err) => {
+                console.log(err);
+                alert('Failed to update superhero');
+            });
         } else if (opState === 'create') {
             axios.post(`http://localhost:8000/superheroes/`,
                 currSuperhero,
@@ -101,8 +110,12 @@ export default function Superheroes() {
                     }
                 }).then((resp: AxiosResponse) => {
                     setCurrSuperhero(resp.data);
+                    alert('Superhero created !')
                     searchHeroes();
-                }).catch(console.error);
+                }).catch((err) => {
+                console.log(err);
+                alert('Failed to create superhero');
+            });
         }
     };
 
@@ -128,7 +141,7 @@ export default function Superheroes() {
             </form>
 
             {isHeroFetched &&
-            (<form classname={'form-group input-group mb-3 row'} onSubmit={submitHero}>
+            (<form className={'form-group input-group mb-3 row'} onSubmit={submitHero}>
                 <div className={'container'}>
                     <div className="row">
                         <div className="col-8">
@@ -246,5 +259,6 @@ export default function Superheroes() {
                     </table>
                 </div>)
             }
-        </div>);
+        </div>
+    );
 };
