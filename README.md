@@ -26,7 +26,7 @@ It uses the Superhero API (https://www.superheroapi.com/) to get information abo
 
 # How to Start
 
-1. Install docker compose on the system.
+1. Install [docker compose](https://docs.docker.com/compose/install/standalone/) on the system.
 2. cd into the project directory and run the following commands
     ##
    <tab><tab> docker-compose build --no-cache <br/> docker-compose up
@@ -75,3 +75,20 @@ At the table footer, the combined powerstats of the team are shown.
 
 7. API documentation \
 The API docs are available at /docs path of the backend server.
+
+# Evaluation
+
+* Code Quality: Clarity, readability, and maintainability of the code. \
+=> Readable, well-structured and modularized code with comments.
+ 
+* Functionality: The application should meet the requirements and work correctly. \
+=> Features listed above work as expected and were tested thoroughly.
+
+* Design: User interface and user experience of the frontend application. \
+=> Simple and intuitive UI/UX.
+ 
+* Documentation: Clear and comprehensive instructions in the README file. \
+=> API documentation available for backend APIs and a README provided as the user guide.
+
+* Bonus: Effective use of caching. \
+=> Use of in-memory custom cache for GET /superheroes or get superheroes page.
