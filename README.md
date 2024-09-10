@@ -32,8 +32,8 @@ It uses the Superhero API (https://www.superheroapi.com/) to get information abo
    <tab><tab> docker-compose build --no-cache <br/> docker-compose up
 
 
-3. The web application UI should be accessible on address localhost:3000/superheroes which is accessible in a web browser.
-
+3. The web application UI should be accessible on address localhost:3000/superheroes which is accessible in a web browser. \
+Note that the application may take about 20 seconds to start.
 
 # List of Features
 
